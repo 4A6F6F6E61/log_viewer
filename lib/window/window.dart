@@ -33,14 +33,14 @@ class AppWindow extends StatelessWidget {
     // Fake Acrylic effect for development because it doesn't work under Linux
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage("assets/background_blue.png"), fit: BoxFit.cover),
+        image: DecorationImage(image: AssetImage("assets/background_red.png"), fit: BoxFit.cover),
       ),
       child: Acrylic(
         tint: Color(0xCC222222),
         blurAmount: 20,
         child: Column(
           children: [
-            WindowTitleBar(),
+            WindowTitleBar(menuBar: menuBar),
             Expanded(child: child),
           ],
         ),
@@ -48,3 +48,82 @@ class AppWindow extends StatelessWidget {
     );
   }
 }
+
+var _orientation = 'landscape';
+var _iconSize = 'medium_icons';
+
+// TODO: Implement actual menubar
+var menuBar = MenuBar(
+  items: [
+    MenuBarItem(
+      title: 'File',
+      items: [
+        MenuFlyoutSubItem(
+          text: const Text('New'),
+          items: (context) {
+            return [
+              MenuFlyoutItem(text: const Text('Plain Text Documents'), onPressed: () {}),
+              MenuFlyoutItem(text: const Text('Rich Text Documents'), onPressed: () {}),
+              MenuFlyoutItem(text: const Text('Other Formats'), onPressed: () {}),
+            ];
+          },
+        ),
+        MenuFlyoutItem(text: const Text('Open'), onPressed: () {}),
+        MenuFlyoutItem(text: const Text('Save'), onPressed: () {}),
+        const MenuFlyoutSeparator(),
+        MenuFlyoutItem(text: const Text('Exit'), onPressed: () {}),
+      ],
+    ),
+    MenuBarItem(
+      title: 'Edit',
+      items: [
+        MenuFlyoutItem(text: const Text('Undo'), onPressed: () {}),
+        MenuFlyoutItem(text: const Text('Cut'), onPressed: () {}),
+        MenuFlyoutItem(text: const Text('Copy'), onPressed: () {}),
+        MenuFlyoutItem(text: const Text('Paste'), onPressed: () {}),
+      ],
+    ),
+    MenuBarItem(
+      title: 'View',
+      items: [
+        MenuFlyoutItem(text: const Text('Output'), onPressed: () {}),
+        const MenuFlyoutSeparator(),
+        RadioMenuFlyoutItem<String>(
+          text: const Text('Landscape'),
+          value: 'landscape',
+          groupValue: _orientation,
+          onChanged: (v) => {},
+        ),
+        RadioMenuFlyoutItem<String>(
+          text: const Text('Portrait'),
+          value: 'portrait',
+          groupValue: _orientation,
+          onChanged: (v) => {},
+        ),
+        const MenuFlyoutSeparator(),
+        RadioMenuFlyoutItem<String>(
+          text: const Text('Small icons'),
+          value: 'small_icons',
+          groupValue: _iconSize,
+          onChanged: (v) => {},
+        ),
+        RadioMenuFlyoutItem<String>(
+          text: const Text('Medium icons'),
+          value: 'medium_icons',
+          groupValue: _iconSize,
+          onChanged: (v) => {},
+        ),
+        RadioMenuFlyoutItem<String>(
+          text: const Text('Large icons'),
+          value: 'large_icons',
+          groupValue: _iconSize,
+          onChanged: (v) => {},
+        ),
+      ],
+    ),
+    MenuBarItem(
+      title: 'Help',
+      items: [MenuFlyoutItem(text: const Text('About'), onPressed: () {})],
+    ),
+  ],
+);

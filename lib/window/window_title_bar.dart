@@ -3,18 +3,25 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:log_viewer/window/window_buttons.dart';
 
 class WindowTitleBar extends StatelessWidget {
-  const WindowTitleBar({super.key});
+  const WindowTitleBar({super.key, this.title, this.menuBar});
+
+  final String? title;
+  final Widget? menuBar;
 
   @override
   Widget build(BuildContext context) {
-    return Acrylic(
+    return Card(
+      padding: EdgeInsetsGeometry.all(0),
+      borderColor: Colors.transparent,
+      borderRadius: BorderRadiusGeometry.circular(0),
       child: SizedBox(
         width: double.infinity,
         height: appWindow.titleBarButtonSize.height,
         child: MoveWindow(
           child: Row(
             children: [
-              Expanded(child: Row(children: [SizedBox(width: 8), Text("Log Viewer")])),
+              title != null ? Row(children: [SizedBox(width: 8), Text(title!)]) : SizedBox(),
+              Expanded(child: menuBar != null ? menuBar! : SizedBox()),
               WindowButtons(),
             ],
           ),

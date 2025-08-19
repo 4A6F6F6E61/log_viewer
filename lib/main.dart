@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
-import 'package:log_viewer/home.dart';
+import 'package:log_viewer/home/home.dart';
 import 'package:log_viewer/theme.dart' as theme;
 import 'package:log_viewer/window/window.dart';
 import 'package:scaled_app/scaled_app.dart';
