@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:log_viewer/components/filter_toggle_button.dart';
 import 'package:log_viewer/home/content.dart';
 
-const double spacing = 8.0;
+const double spacing = 10.0;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +17,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
 
   late bool enableError;
   late bool enableWarning;
+  late bool enableInfo;
 
   late AnimationController sizeAnimController;
 
@@ -32,6 +33,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
     showFilter = false;
     enableError = true;
     enableWarning = true;
+    enableInfo = true;
   }
 
   @override
@@ -65,11 +67,11 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
             child: Column(
               children: [
                 Row(
+                  spacing: spacing,
                   children: [
                     Expanded(
                       child: TextBox(controller: searchController, placeholder: "Search..."),
                     ),
-                    SizedBox(width: 10),
                     Button(
                       onPressed: toggleFilters,
                       child: Row(
@@ -87,6 +89,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                   child: Padding(
                     padding: EdgeInsets.only(top: spacing),
                     child: Row(
+                      spacing: spacing,
                       children: [
                         FilterToggleButton(
                           checked: enableError,
@@ -98,7 +101,6 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                           },
                           label: "Error",
                         ),
-                        SizedBox(width: 10),
                         FilterToggleButton(
                           checked: enableWarning,
                           checkedColor: Colors.yellow.withAlpha(69),
@@ -108,6 +110,16 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                             });
                           },
                           label: "Warning",
+                        ),
+                        FilterToggleButton(
+                          checked: enableInfo,
+                          checkedColor: Colors.green.withAlpha(69),
+                          onChanged: (enable) {
+                            setState(() {
+                              enableInfo = enable;
+                            });
+                          },
+                          label: "Info",
                         ),
                       ],
                     ),

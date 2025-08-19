@@ -23,7 +23,11 @@ class FilterToggleButton extends StatelessWidget {
         checkedButtonStyle: ButtonStyle(
           backgroundColor: WidgetStateMapper({WidgetState.any: checkedColor}),
         ),
+        uncheckedButtonStyle: ButtonStyle(
+          foregroundColor: WidgetStateMapper({WidgetState.any: Colors.white.withAlpha(100)}),
+        ),
       ),
+
       child: Text(label),
     );
   }
