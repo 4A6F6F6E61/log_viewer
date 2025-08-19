@@ -1,17 +1,39 @@
+import 'dart:io';
+
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:log_viewer/home.dart';
+import 'package:log_viewer/theme.dart' as theme;
+import 'package:log_viewer/window/window.dart';
+import 'package:scaled_app/scaled_app.dart';
 
-void main() {
+Future<void> main() async {
+  ScaledWidgetsFlutterBinding.ensureInitialized(
+    scaleFactor: (size) {
+      if (Platform.isLinux) {
+        return 1.2;
+      }
+      return 1;
+    },
+  );
+  await Window.initialize();
+
+  if (Platform.isWindows) {
+    await Window.hideWindowControls();
+  }
+
   runApp(const MyApp());
 
-  doWhenWindowReady(() {
-    const initialSize = Size(600, 450);
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
-    appWindow.alignment = Alignment.center;
-    appWindow.show();
-  });
+  if (!Platform.isMacOS) {
+    doWhenWindowReady(() {
+      appWindow
+        ..minSize = Size(640, 360)
+        ..size = Size(720, 540)
+        ..alignment = Alignment.center
+        ..show();
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -21,8 +43,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FluentApp(
       title: 'Flutter Demo',
-      theme: FluentThemeData(brightness: Brightness.dark),
-      home: const Home(title: 'Flutter Demo Home Page'),
+      theme: theme.themeData,
+      home: const AppWindow(child: Home()),
     );
   }
 }
