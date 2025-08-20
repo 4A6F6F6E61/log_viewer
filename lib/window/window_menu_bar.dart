@@ -1,5 +1,9 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:log_viewer/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+// TODO: Make every entry do something
 class WindowMenuBar extends StatelessWidget {
   const WindowMenuBar({super.key, required this.openFile});
 
@@ -12,29 +16,14 @@ class WindowMenuBar extends StatelessWidget {
         MenuBarItem(
           title: 'File',
           items: [
-            MenuFlyoutSubItem(
-              text: const Text('New'),
-              items: (context) {
-                return [
-                  MenuFlyoutItem(text: const Text('Plain Text Documents'), onPressed: () {}),
-                  MenuFlyoutItem(text: const Text('Rich Text Documents'), onPressed: () {}),
-                  MenuFlyoutItem(text: const Text('Other Formats'), onPressed: () {}),
-                ];
+            MenuFlyoutItem(text: const Text('Open'), onPressed: openFile),
+            const MenuFlyoutSeparator(),
+            MenuFlyoutItem(
+              text: const Text('Exit'),
+              onPressed: () {
+                appWindow.close();
               },
             ),
-            MenuFlyoutItem(text: const Text('Open'), onPressed: openFile),
-            MenuFlyoutItem(text: const Text('Save'), onPressed: () {}),
-            const MenuFlyoutSeparator(),
-            MenuFlyoutItem(text: const Text('Exit'), onPressed: () {}),
-          ],
-        ),
-        MenuBarItem(
-          title: 'Edit',
-          items: [
-            MenuFlyoutItem(text: const Text('Undo'), onPressed: () {}),
-            MenuFlyoutItem(text: const Text('Cut'), onPressed: () {}),
-            MenuFlyoutItem(text: const Text('Copy'), onPressed: () {}),
-            MenuFlyoutItem(text: const Text('Paste'), onPressed: () {}),
           ],
         ),
         MenuBarItem(
@@ -77,7 +66,34 @@ class WindowMenuBar extends StatelessWidget {
         ),
         MenuBarItem(
           title: 'Help',
-          items: [MenuFlyoutItem(text: const Text('About'), onPressed: () {})],
+          items: [
+            MenuFlyoutItem(
+              text: const Text('About'),
+              onPressed: () async {
+                await showDialog<String>(
+                  context: context,
+                  builder: (context) => ContentDialog(
+                    title: const Text('Log Viewer'),
+                    content: const Text(
+                      'A simple log file viewer using the Fluent design build with Flutter by Joona Brückner',
+                    ),
+                    actions: [
+                      FilledButton(
+                        child: const Text('Github'),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                          if (!await launchUrl(repoUrl)) {
+                            throw Exception('Could not launch $repoUrl');
+                          }
+                        },
+                      ),
+                      Button(child: const Text('Done'), onPressed: () => Navigator.pop(context)),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ],
     );

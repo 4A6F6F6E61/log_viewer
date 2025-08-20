@@ -1,4 +1,3 @@
-import 'dart:developer' as dev;
 import 'dart:io';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -11,6 +10,8 @@ import 'package:log_viewer/theme.dart' as theme;
 import 'package:log_viewer/window/window.dart';
 import 'package:log_viewer/window/window_menu_bar.dart';
 import 'package:scaled_app/scaled_app.dart';
+
+final Uri repoUrl = Uri.parse('https://github.com/4A6F6F6E61/log_viewer');
 
 Future<void> main() async {
   ScaledWidgetsFlutterBinding.ensureInitialized(

@@ -36,13 +36,15 @@ Color darken(Color color, [double amount = .1]) {
 Color getFilterColor(String filter, {int alpha = 255}) {
   switch (filter.toLowerCase()) {
     case "error":
-      return Colors.red.withAlpha(alpha);
+      return Colors.errorPrimaryColor.withAlpha(alpha);
     case "warn":
     case "warning":
-      return Colors.yellow.withAlpha(alpha);
+      return Colors.warningPrimaryColor.withAlpha(alpha);
     case "info":
     case "notice":
-      return Colors.green.withAlpha(alpha);
+      return Colors.successPrimaryColor.withAlpha(alpha);
+    case "trace":
+      return Colors.errorSecondaryColor.withAlpha(alpha);
   }
   return Colors.magenta.withAlpha(alpha);
 }
