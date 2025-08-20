@@ -15,6 +15,7 @@ dependencies:
   bitsdojo_window: ^0.1.6
   flutter_acrylic: ^1.1.4
   scaled_app: ^2.3.0
+  file_picker: ^10.3.1
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/example.log
-    - assets/background_blue.png
-    - assets/background_red.png
+    - assets/

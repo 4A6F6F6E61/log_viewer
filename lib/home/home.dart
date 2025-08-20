@@ -1,11 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:log_viewer/components/filter_toggle_button.dart';
 import 'package:log_viewer/home/content.dart';
+import 'package:log_viewer/log_parser/log_file.dart';
 
 const double spacing = 10.0;
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, required this.currentFile, required this.setCurrentFile});
+
+  final LogFile? currentFile;
+  final void Function(LogFile) setCurrentFile;
 
   @override
   State<Home> createState() => _MyHomePageState();
