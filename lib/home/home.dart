@@ -139,7 +139,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-        Content(),
+        Content(currentFile: widget.currentFile),
       ],
     );
   }

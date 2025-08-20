@@ -1,27 +1,38 @@
 import 'dart:developer' as dev;
 
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:log_viewer/components/log_list_tile.dart';
 import 'package:log_viewer/log_parser/log_file.dart';
 
-class Content extends StatelessWidget {
-  const Content({super.key});
+class Content extends StatefulWidget {
+  const Content({super.key, required this.currentFile});
+
+  final LogFile? currentFile;
+
+  @override
+  State<Content> createState() => _ContentState();
+}
+
+class _ContentState extends State<Content> {
+  final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
+
+  Widget buildItem(BuildContext context, int i, Animation<double> _) {
+    return LogListTile(entry: widget.currentFile!.entries[i]);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Center(
-        child: Button(
-          onPressed: () async {
-            final logFile = await LogFile.asset("/assets/example.log");
-
-            logFile.parse();
-
-            dev.log("First Line:", name: "LogParser");
-            dev.log(logFile.entries.first.toString(), name: "");
-            dev.log("------------------------------------------", name: "LogParser");
-          },
-          child: Text("Load LogFile"),
-        ),
+      child: Padding(
+        padding: EdgeInsetsGeometry.symmetric(vertical: 8.0),
+        child: widget.currentFile != null
+            ? AnimatedList(
+                key: listKey,
+                initialItemCount: widget.currentFile!.entries.length,
+                itemBuilder: buildItem,
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 8.0),
+              )
+            : Center(child: Text("Please Open a Log File")),
       ),
     );
   }

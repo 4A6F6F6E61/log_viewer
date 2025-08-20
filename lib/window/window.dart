@@ -14,6 +14,7 @@ class AppWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Add a check to make sure this only gets called once
     if (!Platform.isLinux) {
       Window.setEffect(
         effect: WindowEffect.acrylic,

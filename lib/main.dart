@@ -69,16 +69,12 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       currentFile = logFile;
     });
-
-    dev.log("First Line:", name: "LogParser");
-    dev.log(logFile.entries.first.toString(), name: "");
-    dev.log("------------------------------------------", name: "LogParser");
   }
 
   @override
   Widget build(BuildContext context) {
     return FluentApp(
-      title: 'Flutter Demo',
+      title: 'Log Viewer',
       theme: theme.themeData,
       home: AppWindow(
         menuBar: WindowMenuBar(openFile: openFile),
