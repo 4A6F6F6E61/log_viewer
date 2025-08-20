@@ -32,3 +32,17 @@ Color darken(Color color, [double amount = .1]) {
 
   return hslDark.toColor();
 }
+
+Color getFilterColor(String filter, {int alpha = 255}) {
+  switch (filter.toLowerCase()) {
+    case "error":
+      return Colors.red.withAlpha(alpha);
+    case "warn":
+    case "warning":
+      return Colors.yellow.withAlpha(alpha);
+    case "info":
+    case "notice":
+      return Colors.green.withAlpha(alpha);
+  }
+  return Colors.magenta.withAlpha(alpha);
+}

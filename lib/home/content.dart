@@ -1,5 +1,3 @@
-import 'dart:developer' as dev;
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:log_viewer/components/log_list_tile.dart';
 import 'package:log_viewer/log_parser/log_file.dart';

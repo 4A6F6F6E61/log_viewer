@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:log_viewer/components/filter_toggle_button.dart';
 import 'package:log_viewer/home/content.dart';
 import 'package:log_viewer/log_parser/log_file.dart';
+import 'package:log_viewer/theme.dart';
 
 const double spacing = 10.0;
 
@@ -95,9 +96,10 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Row(
                       spacing: spacing,
                       children: [
+                        // TODO: Generate this filter list based on the actual File
                         FilterToggleButton(
                           checked: enableError,
-                          checkedColor: Colors.red.withAlpha(69),
+                          checkedColor: getFilterColor("Error", alpha: 69),
                           onChanged: (enable) {
                             setState(() {
                               enableError = enable;
@@ -107,7 +109,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                         FilterToggleButton(
                           checked: enableWarning,
-                          checkedColor: Colors.yellow.withAlpha(69),
+                          checkedColor: getFilterColor("Warning", alpha: 69),
                           onChanged: (enable) {
                             setState(() {
                               enableWarning = enable;
@@ -117,7 +119,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                         FilterToggleButton(
                           checked: enableInfo,
-                          checkedColor: Colors.green.withAlpha(69),
+                          checkedColor: getFilterColor("Info", alpha: 69),
                           onChanged: (enable) {
                             setState(() {
                               enableInfo = enable;

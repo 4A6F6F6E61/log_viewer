@@ -1,19 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:log_viewer/log_parser/log_file.dart';
-
-Color getFilterColor(String filter) {
-  switch (filter.toLowerCase()) {
-    case "error":
-      return Colors.red;
-    case "warn":
-    case "warning":
-      return Colors.yellow;
-    case "info":
-    case "notice":
-      return Colors.green;
-  }
-  return Colors.magenta;
-}
+import 'package:log_viewer/theme.dart';
 
 class LogListTile extends StatefulWidget {
   const LogListTile({super.key, required this.entry});
