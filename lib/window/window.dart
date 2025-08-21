@@ -17,14 +17,14 @@ class AppWindow extends StatelessWidget {
     // TODO: Add a check to make sure this only gets called once
     if (!Platform.isLinux) {
       Window.setEffect(
-        effect: WindowEffect.acrylic,
-        color: Color(0xCC222222),
+        effect: WindowEffect.mica,
+        // color: Color(0xCC222222),
         dark: FluentTheme.of(context).brightness == Brightness.dark,
       );
 
       return Column(
         children: [
-          WindowTitleBar(),
+          WindowTitleBar(menuBar: menuBar),
           Expanded(child: child),
         ],
       );

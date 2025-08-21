@@ -16,9 +16,10 @@ class WindowTitleBar extends StatelessWidget {
       borderRadius: BorderRadiusGeometry.circular(0),
       child: SizedBox(
         width: double.infinity,
-        height: appWindow.titleBarButtonSize.height,
+        height: appWindow.titleBarButtonSize.height + 10,
         child: MoveWindow(
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               title != null ? Row(children: [SizedBox(width: 8), Text(title!)]) : SizedBox(),
               Expanded(child: menuBar != null ? menuBar! : SizedBox()),
