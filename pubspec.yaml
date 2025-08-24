@@ -17,6 +17,7 @@ dependencies:
   scaled_app: ^2.3.0
   file_picker: ^10.3.1
   url_launcher: ^6.3.2
+  fluent_window: ^0.0.1
 
 dev_dependencies:
   flutter_test:

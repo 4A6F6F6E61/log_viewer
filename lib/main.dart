@@ -7,9 +7,9 @@ import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:log_viewer/home/home.dart';
 import 'package:log_viewer/log_parser/log_file.dart';
 import 'package:log_viewer/theme.dart' as theme;
-import 'package:log_viewer/window/window.dart';
-import 'package:log_viewer/window/window_menu_bar.dart';
+import 'package:log_viewer/window_menu_bar.dart';
 import 'package:scaled_app/scaled_app.dart';
+import 'package:fluent_window/fluent_window.dart';
 
 final Uri repoUrl = Uri.parse('https://github.com/4A6F6F6E61/log_viewer');
 
@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
     return FluentApp(
       title: 'Log Viewer',
       theme: theme.themeData,
-      home: AppWindow(
+      home: FluentWindow(
         menuBar: WindowMenuBar(openFile: openFile),
         child: Home(
           currentFile: currentFile,
