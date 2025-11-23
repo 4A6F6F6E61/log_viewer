@@ -15,7 +15,7 @@ final Uri repoUrl = Uri.parse('https://github.com/4A6F6F6E61/log_viewer');
 
 Future<void> main() async {
   ScaledWidgetsFlutterBinding.ensureInitialized(
-    scaleFactor: (size) {
+    scaleFactor: (_) {
       if (Platform.isLinux) {
         return 1.2;
       }
@@ -77,6 +77,7 @@ class _MyAppState extends State<MyApp> {
     return FluentApp(
       title: 'Log Viewer',
       theme: theme.themeData,
+
       home: FluentWindow(
         menuBar: WindowMenuBar(openFile: openFile),
         child: Home(

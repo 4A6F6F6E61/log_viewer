@@ -20,9 +20,7 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
   late TextEditingController searchController;
   late bool showFilter;
 
-  late bool enableError;
-  late bool enableWarning;
-  late bool enableInfo;
+  Map<String, bool> enabledFilters = {};
 
   late AnimationController sizeAnimController;
 
@@ -36,9 +34,6 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
     );
 
     showFilter = false;
-    enableError = true;
-    enableWarning = true;
-    enableInfo = true;
   }
 
   @override
@@ -61,6 +56,11 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // Update the filters
+    widget.currentFile?.filters.forEach((filter) {
+      if (enabledFilters.containsKey(filter)) return;
+      enabledFilters[filter] = true;
+    });
     return Column(
       children: [
         Card(
@@ -93,41 +93,26 @@ class _MyHomePageState extends State<Home> with SingleTickerProviderStateMixin {
                   sizeFactor: sizeAnimController,
                   child: Padding(
                     padding: EdgeInsets.only(top: spacing),
-                    child: Row(
-                      spacing: spacing,
-                      children: [
-                        // TODO: Generate this filter list based on the actual File
-                        FilterToggleButton(
-                          checked: enableError,
-                          checkedColor: getFilterColor("Error", alpha: 69),
-                          onChanged: (enable) {
-                            setState(() {
-                              enableError = enable;
-                            });
-                          },
-                          label: "Error",
-                        ),
-                        FilterToggleButton(
-                          checked: enableWarning,
-                          checkedColor: getFilterColor("Warning", alpha: 69),
-                          onChanged: (enable) {
-                            setState(() {
-                              enableWarning = enable;
-                            });
-                          },
-                          label: "Warning",
-                        ),
-                        FilterToggleButton(
-                          checked: enableInfo,
-                          checkedColor: getFilterColor("Info", alpha: 69),
-                          onChanged: (enable) {
-                            setState(() {
-                              enableInfo = enable;
-                            });
-                          },
-                          label: "Info",
-                        ),
-                      ],
+                    child: SizedBox(
+                      height: 50,
+                      width: double.maxFinite,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          if (widget.currentFile != null)
+                            for (final entry in enabledFilters.entries)
+                              FilterToggleButton(
+                                checked: entry.value,
+                                checkedColor: getFilterColor(entry.key, alpha: 69),
+                                onChanged: (v) {
+                                  setState(() {
+                                    enabledFilters[entry.key] = v;
+                                  });
+                                },
+                                label: entry.key,
+                              ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

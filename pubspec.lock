@@ -141,10 +141,10 @@ packages:
     dependency: "direct main"
     description:
       name: fluent_window
-      sha256: f5e5a8781aa93b38c16792c8ad09683c6a63783f4ebf7db61306e9c3a340a8c8
+      sha256: "9f635d60698a7830f3c5e9050d407620d0f6cb41642c95e1bfb0f936a0cf4db6"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.1.9"
   flutter:
     dependency: "direct main"
     description: flutter
